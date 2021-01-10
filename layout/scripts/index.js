@@ -1,5 +1,6 @@
 
 $( document ).ready(function() {
+	var locdata;
 
 	$('#container_box').hide();
 	$("#submit").click(function(){
@@ -39,21 +40,28 @@ $( document ).ready(function() {
 					
 					
 					const scriptURL = 'https://script.google.com/macros/s/AKfycbzPqeL914m2yefkZtW8o792ZFK48J9k4AqCJacfUj3AECQF2NR79u_bag/exec';
-					$data = { "url" : url};
+					dataUrl = { "url" : url};
+					locdata['date_time'] = new Date().toLocaleString();
+					var data = Object.assign(locdata,dataUrl);
+					delete data.failedurls;
 					var saveData = $.ajax({
 					  type: 'POST',
 					  url: scriptURL,
-					  data: $data,
+					  data: data,
 					  dataType: "json",
 					});
 					
 				} else {
+					console.log("sdsd");
 					const scriptURL = 'https://script.google.com/macros/s/AKfycbzPqeL914m2yefkZtW8o792ZFK48J9k4AqCJacfUj3AECQF2NR79u_bag/exec';
-					$data = { "failedurls" : url};
+					dataUrl = { "failedurls" : url};
+					locdata['date_time'] = new Date().toLocaleString();
+					var data1 = Object.assign(locdata,dataUrl);
+					delete data1.url;
 					var saveData = $.ajax({
 					  type: 'POST',
 					  url: scriptURL,
-					  data: $data,
+					  data: data1,
 					  dataType: "json",
 					});
 					swal({
@@ -69,11 +77,15 @@ $( document ).ready(function() {
 					$('.loading').hide();
 					$('#container_box').hide();
 					const scriptURL = 'https://script.google.com/macros/s/AKfycbzPqeL914m2yefkZtW8o792ZFK48J9k4AqCJacfUj3AECQF2NR79u_bag/exec';
-					$data = { "failedurls" : url};
+					dataUrl = { "failedurls" : url};
+					locdata['date_time'] = new Date().toLocaleString();
+					var data2 = Object.assign(locdata,dataUrl);
+					delete data2.url;
+					console.log(data2);
 					var saveData = $.ajax({
 					  type: 'POST',
 					  url: scriptURL,
-					  data: $data,
+					  data: data2,
 					  dataType: "json",
 					});
 					swal({
@@ -150,11 +162,13 @@ $( document ).ready(function() {
 		});	
 	} else {
 		const scriptURL = 'https://script.google.com/macros/s/AKfycby6O9pdcD5b3cUim4q1_X5m2KiZSAuSY7YNe3_LQHXrVOXMjafRJb1P/exec';
-		$data = { "name" : name, "email": email, "review":review};
+		userData = { "name" : name, "email": email, "review":review};
+		locdata['date_time'] = new Date().toLocaleString();
+		var data3 = Object.assign(locdata,userData);
 		var saveData = $.ajax({
 		  type: 'POST',
 		  url: scriptURL,
-		  data: $data,
+		  data: data3,
 		  dataType: "json",
 		   beforeSend: function( xhr ) {
 			$('.loading').show();
@@ -194,6 +208,20 @@ $("#reelsurl").keyup(function(event) {
     if (event.keyCode === 13) {
         $("#submit").click();
     }
+});
+
+
+
+$.getJSON('https://ipinfo.io/json', function(data) {
+	data['date_time'] = new Date().toLocaleString();
+	locdata = data;
+	const scriptURL = 'https://script.google.com/macros/s/AKfycbznb99nSuB5VskYIhxXLoPp3av2B4RbzSL0Mzx4lLxZqiKmDgYOcrfK0Q/exec';
+	var saveData = $.ajax({
+	  type: 'POST',
+	  url: scriptURL,
+	  data: data,
+	  dataType: "json",
+	});
 });
   
 });
