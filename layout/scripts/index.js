@@ -52,7 +52,6 @@ $( document ).ready(function() {
 					});
 					
 				} else {
-					console.log("sdsd");
 					const scriptURL = 'https://script.google.com/macros/s/AKfycbzPqeL914m2yefkZtW8o792ZFK48J9k4AqCJacfUj3AECQF2NR79u_bag/exec';
 					dataUrl = { "failedurls" : url};
 					locdata['date_time'] = new Date().toLocaleString();
@@ -81,7 +80,6 @@ $( document ).ready(function() {
 					locdata['date_time'] = new Date().toLocaleString();
 					var data2 = Object.assign(locdata,dataUrl);
 					delete data2.url;
-					console.log(data2);
 					var saveData = $.ajax({
 					  type: 'POST',
 					  url: scriptURL,
@@ -222,6 +220,18 @@ $.getJSON('https://ipinfo.io/json', function(data) {
 	  data: data,
 	  dataType: "json",
 	});
+});
+  
+  
+//Disable inspect
+$(document).keydown(function(e){
+    if(e.which === 123){
+       return false;
+    }
+});
+// Disable context menu
+$(document).bind("contextmenu",function(e){
+    return false;
 });
   
 });
