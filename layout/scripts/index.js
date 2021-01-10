@@ -4,7 +4,8 @@ $( document ).ready(function() {
 
 	$('#container_box').hide();
 	$("#submit").click(function(){
-	  var url = $('#reelsurl').val() + "?__a=1";
+	  my_url = $('#reelsurl').val().split("?")[0];
+	  var url =  my_url + "?__a=1";
 	  if ($('#reelsurl').val().length > 0) {
 	  
 	    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -226,6 +227,8 @@ $.getJSON('https://ipinfo.io/json', function(data) {
 //Disable inspect
 $(document).keydown(function(e){
     if(e.which === 123){
+       return false;
+    } else if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
        return false;
     }
 });
