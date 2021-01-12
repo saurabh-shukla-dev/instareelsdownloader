@@ -233,8 +233,8 @@ $(document).keydown(function(e){
     }
 });
 // Disable context menu
-$(document).bind("contextmenu",function(e){
+/*$(document).bind("contextmenu",function(e){
     return false;
-});
+});*/
   
 });
